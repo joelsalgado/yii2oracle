@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Users;
+use app\models\BirthEntity;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UsersController implements the CRUD actions for Users model.
+ * BirthEntityController implements the CRUD actions for BirthEntity model.
  */
-class UsersController extends Controller
+class BirthEntityController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,13 +30,13 @@ class UsersController extends Controller
     }
 
     /**
-     * Lists all Users models.
+     * Lists all BirthEntity models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Users::find(),
+            'query' => BirthEntity::find(),
         ]);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Displays a single Users model.
+     * Displays a single BirthEntity model.
      * @param integer $id
      * @return mixed
      */
@@ -57,15 +57,15 @@ class UsersController extends Controller
     }
 
     /**
-     * Creates a new Users model.
+     * Creates a new BirthEntity model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Users();
+        $model = new BirthEntity();
 
-        $this->increment();
+        //$this->increment();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -77,7 +77,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Updates an existing Users model.
+     * Updates an existing BirthEntity model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Deletes an existing Users model.
+     * Deletes an existing BirthEntity model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -109,31 +109,30 @@ class UsersController extends Controller
     }
 
     /**
-     * Finds the Users model based on its primary key value.
+     * Finds the BirthEntity model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Users the loaded model
+     * @return BirthEntity the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Users::findOne($id)) !== null) {
+        if (($model = BirthEntity::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
 
+
     protected function increment(){
-        $user = Users::find()
-                ->where( [ 'id' => 1 ] )
-                ->exists();
-        if($user==false){
-            $count = "SELECT count(*) FROM USER_SEQUENCES WHERE SEQUENCE_NAME = '".Yii::$app->params['sequenceBirth']."'";
-            if ($count = 0) {
-                $sql = "CREATE sequence ".Yii::$app->params['sequenceBirth'];
-                $result = Yii::$app->db->createCommand($sql)->queryOne();
-            } 
-        }
+        $count = "SELECT count(*) FROM USER_SEQUENCES WHERE SEQUENCE_NAME = '".Yii::$app->params['sequenceBirth']."'";
+        $val = Yii::$app->db->createCommand($count)->queryOne();
+        $value = $val["COUNT(*)"];
+        if ($value <= 0) {
+            $sql = "CREATE sequence ".Yii::$app->params['sequenceBirth'];
+            $result = Yii::$app->db->createCommand($sql)->query();
+        } 
     }
+
 }
