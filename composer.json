@@ -19,7 +19,8 @@
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "apaoww/yii2-oci8": "dev-master",
-        "kartik-v/yii2-krajee-base": "dev-master"
+        "kartik-v/yii2-krajee-base": "dev-master",
+        "kartik-v/yii2-mpdf": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
