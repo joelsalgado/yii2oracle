@@ -13,6 +13,15 @@ $config = [
         '@apaoww/oci8' => 'path/to/your/extracted',
     ],
     'components' => [
+        'urlManager' => [
+        'class' => 'yii\web\UrlManager',
+            // Hide index.php
+            'showScriptName' => false,
+            // Use pretty URLs
+            'enablePrettyUrl' => true,
+            'rules' => [
+            ],
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'yPMpqZMN76pkhlJ7IoNvrVhO51AaqRWr',

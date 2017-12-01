@@ -8,7 +8,7 @@ $this->title = 'FUR';
     <div class="jumbotron">
         <h1>FUR!</h1>
 
-        <p><a class="btn btn-lg btn-success" href="<?= Yii::$app->homeUrl?>?r=applicants">Empezar</a></p>
+        <p><a class="btn btn-lg btn-success" href="<?= Yii::$app->homeUrl?>applicants">Empezar</a></p>
     </div>
 
     <div class="body-content">
