@@ -1,73 +1,71 @@
-<style>
-    #customers {
-        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-    }
+<div class="page-header">
+    <table class="table">
+        <tr>
+            <td><img class="rounded float-left" src="http://japem.edomex.gob.mx/sites/japem.edomex.gob.mx/files/images/EDOMEX_OK-01(1).png" height="54" width="81"> </td>
+            <td align="right"><img style="text-align:right" src="https://seeklogo.com/images/G/gobierno-del-estado-de-mexico-en-grande-logo-FE81DB6908-seeklogo.com.png" height="54" width="81"></td>
+        </tr>
+    </table>
 
-    #customers td, #customers th {
-        border: 1px solid #ddd;
-        padding: 8px;
-    }
+    <h4 align="center">FORMATO UNICO DE REGISTRO</h4>
+    <h5 align="center">PROGRAMA DE DESARROLLO SOCIAL GENTE EN GRANDE</h5>
+</div>
 
-    #customers tr:nth-child(even){background-color: #f2f2f2;}
+<div class="alert alert-danger">
+    <p style="text-align: center">DATOS PERSONALES DE(LA) SOLICITANTE</p>
+</div>
 
-    #customers tr:hover {background-color: #ddd;}
-
-    #customers th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: #4CAF50;
-        color: white;
-    }
-</style>
-
-
-<table id="customers">
+<table class="table">
+    <tbody>
     <tr>
-        <th>Apellido Paterno</th>
-        <th>Apellido Materno</th>
-        <th>Nombre(s)</th>
-    </tr>
-    <tr>
+        <td class="active"><strong>Apellido Paterno</strong></td>
         <td><?= $model->last_name ?></td>
-        <td><?= $model->last_name2 ?></td>
-        <td><?= $model->name ?></td>0
-    </tr>
-
-    <tr>
-        <th>Curp</th>
-        <th>Celular</th>
-        <th>Telefono</th>
-    </tr>
-    <tr>
-        <td><?= $model->CURP ?></td>
-        <td><?= $model->lada_celphone ?>-<?= $model->celphone ?></td>
-        <td><?= $model->lada_phone ?>-<?= $model->phone ?></td>0
-    </tr>
-
-    <tr>
-        <th>Sexo</th>
-        <th>Fecha de Nacimiento</th>
-        <th>Entidad de Nacimiento</th>
-    </tr>
-    <tr>
+        <td class="active"><strong>Sexo</strong></td>
         <td><?= $model->gender ?></td>
+    </tr>
+    <tr>
+        <td class="active"><strong>Apellido Materno</strong></td>
+        <td><?= $model->last_name2 ?></td>
+        <td class="active"><strong>Fecha de Nacimiento</strong></td>
         <td><?= $model->date ?></td>
-        <td><?= $model->entity->name_entity?></td>0
-    </tr>
-
-    <tr>
-        <th>Estado Civil</th>
-        <th>Naciolidad</th>
-        <th>Correo electronico</th>
     </tr>
     <tr>
+        <td class="active"><strong>Nombre</strong></td>
+        <td><?= $model->name ?></td>
+        <td class="active"><strong>Entidad de Nacimiento</strong></td>
+        <td><?= $model->entity->name_entity ?></td>
+    </tr>
+    <tr>
+        <td class="active"><strong>CURP</strong></td>
+        <td><?= $model->CURP ?></td>
+        <td class="active"><strong>Estado Civil</strong></td>
         <td><?= $model->civil->name_civil_status ?></td>
-        <td><?= $model->nationalily->NAME_NATIONALITIES ?></td>
-        <td><?= $model->email?></td>0
     </tr>
-
-
+    <tr>
+        <td class="active"><strong>Celular</strong></td>
+        <td><?= $model->lada_celphone ?>-<?= $model->celphone ?></td>
+        <td class="active"><strong>Nacionalidad</strong></td>
+        <td><?= $model->nationalily->NAME_NATIONALITIES ?></td>
+    </tr>
+    <tr>
+        <td class="active"><strong>Telefono</strong></td>
+        <td><?= $model->lada_phone ?>-<?= $model->phone ?></td>
+        <td class="active"><strong>Email</strong></td>
+        <td><?= $model->email ?></td>
+    </tr>
+    </tbody>
 </table>
+
+<div class="alert alert-danger">
+    <p style="text-align: center">DOCUMENTOS CONFORME A LAS REGLAS DE OPERACION</p>
+</div>
+
+<div id="showBarcode"></div>
+<?php
+use barcode\barcode\BarcodeGenerator;
+$optionsArray = array(
+    'elementId'=> 'showBarcode',
+    'value'=> '12345678',
+    'type'=>'code128',
+);
+echo BarcodeGenerator::widget($optionsArray);
+?>

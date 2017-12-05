@@ -48,7 +48,6 @@ use yii\widgets\MaskedInput;
         <div class="col-lg-4">
              <?= $form->field($model, 'birh_entity_id')->dropDownList(ArrayHelper::
                 map(BirthEntity::find()->asArray()->all(), 'id', 'name_entity') ) ?>
-
         </div>
         <div class="col-lg-4">
             <?= $form->field($model, 'civil_status_id')->dropDownList(ArrayHelper::
