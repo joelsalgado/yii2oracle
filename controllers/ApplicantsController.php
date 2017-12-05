@@ -8,6 +8,7 @@ use app\models\ApplicantsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use kartik\mpdf\Pdf;
 
 /**
  * ApplicantsController implements the CRUD actions for Applicants model.
@@ -94,12 +95,6 @@ class ApplicantsController extends Controller
         }
     }
 
-    /**
-     * Deletes an existing Applicants model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
@@ -107,13 +102,7 @@ class ApplicantsController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the Applicants model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Applicants the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+
     protected function findModel($id)
     {
         if (($model = Applicants::findOne($id)) !== null) {
@@ -131,6 +120,21 @@ class ApplicantsController extends Controller
         if ($value <= 0) {
             $sql = "CREATE sequence ".Yii::$app->params['sequenceApplicants'];
             $result = Yii::$app->db->createCommand($sql)->query();
-        } 
+        }
+    }
+
+    public function actionReport($id) {
+        $model = Applicants::findOne($id);
+        $content = $this->renderPartial('_reportView', [
+            'model'=> $model
+        ]);
+        $pdf = Yii::$app->pdf;
+        $pdf->options = ['title' => 'Reporte'];
+        $pdf->cssFile;
+        $mpdf = $pdf->api;
+        $mpdf->SetHeader('Secretaria de Desarrollo Social');
+        $mpdf->WriteHtml($content);
+
+        return $pdf->render();
     }
 }

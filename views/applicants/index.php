@@ -18,7 +18,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Crear Solicitante', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+<?php Pjax::begin(); ?>
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -42,7 +43,18 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'created_at',
             // 'updated_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
+
+            ['class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                    'report' => function ($model) {
+                        return Html::a ( '<span class="glyphicon glyphicon-search" aria-hidden="true"></span> ', $model );
+                    },
+                ],
+                'template' => '{update} {view} {delete} {report}'
+
+
+            ],
+
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>
