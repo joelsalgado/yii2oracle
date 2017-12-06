@@ -16,8 +16,8 @@ class HOMEDATA extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ID'], 'required'],
-            [['ID', 'INTERIOR_NUMBER', 'EXTERIOR_NUMBER', 'MUN_ID', 'KEY_STATE', 'KEY_MUN', 'SEC_ID'], 'number'],
+            [['STREET'], 'required'],
+            [['ID', 'INTERIOR_NUMBER', 'STATUS', 'EXTERIOR_NUMBER', 'MUN_ID', 'KEY_STATE', 'KEY_MUN', 'SEC_ID'], 'number'],
             [['POSTAL_CODE', 'APPLICANTS_ID'], 'integer'],
             [['STREET', 'BETWEEN_STREET', 'AND_STREET'], 'string', 'max' => 150],
             [['OTHER_REFERENCE', 'LOCALITY'], 'string', 'max' => 255]
@@ -41,6 +41,7 @@ class HOMEDATA extends \yii\db\ActiveRecord
             'SEC_ID' => 'Seccion',
             'POSTAL_CODE' => 'Codigo Postal',
             'APPLICANTS_ID' => 'Id Solicitante',
+            'STATUS' => 'Estatus',
         ];
     }
 
@@ -54,8 +55,27 @@ class HOMEDATA extends \yii\db\ActiveRecord
         return $this->hasOne(MUNICIPALITY::className(), ['ID' => 'MUN_ID']);
     }
 
-    public function getSection()
+    public function getSec()
     {
         return $this->hasOne(SECTION::className(), ['ID' => 'SEC_ID']);
+    }
+
+    public function beforeSave($insert)
+    {
+
+        if (parent::beforeSave($insert)) {
+
+            if ($this->isNewRecord) {
+
+                $sql = "SELECT ".Yii::$app->params['sequenceHome'].".NEXTVAL FROM DUAL";
+                $result = Yii::$app->db->createCommand($sql)->queryOne();
+                $this->ID = $result["NEXTVAL"];
+            }
+            $this->STATUS = 1 ;
+
+
+            return true;
+        }
+
     }
 }

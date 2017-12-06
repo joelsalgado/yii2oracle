@@ -6,4 +6,5 @@ return [
     'sequenceBirth' => 'BIRTH_TABLE',
     'sequenceCivil' => 'CIVIL_TABLE',
     'sequenceApplicants' => 'APPLICANTS_TABLE',
+    'sequenceHome' => 'HOME_TABLE',
 ];

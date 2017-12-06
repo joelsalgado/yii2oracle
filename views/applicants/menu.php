@@ -15,4 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <a href="/applicants/update?id=<?=$model->id?>">
         <label style="font-size: 20px"><span class=" label label-success">Datos Personales <span class="glyphicon glyphicon-ok"></span></span></label>
     </a>
+    <hr>
+    <a href="/applicants/update-data?id=<?=$model->id?>">
+        <label style="font-size: 20px"><span class=" label label-success">Datos Domiciliarios <span class="glyphicon glyphicon-ok"></span></span></label>
+    </a>
 <?php endif;?>

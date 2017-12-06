@@ -76,3 +76,53 @@
     </tbody>
 </table>
 
+<div class="alert alert-danger">
+    <p style="text-align: center">DOMICILIO  DE(LA) SOLICITANTE</p>
+</div>
+
+<table class="table">
+    <tbody>
+    <tr>
+        <td class="active"><strong>Calle</strong></td>
+        <td><?= $home->STREET ?></td>
+        <td class="active"><strong>Numero Exterior</strong></td>
+        <td><?= $home->EXTERIOR_NUMBER ?></td>
+    </tr>
+    <tr>
+
+        <td class="active"><strong>Numero Interior</strong></td>
+        <td><?= $home->INTERIOR_NUMBER ?></td>
+        <td class="active"><strong>Codigo Postal</strong></td>
+        <td><?= $home->POSTAL_CODE ?></td>
+    </tr>
+    <tr>
+        <td class="active"><strong>Entre Calle</strong></td>
+        <td><?= $home->BETWEEN_STREET ?></td>
+        <td class="active"><strong>Y Calle</strong></td>
+        <td><?= $home->AND_STREET ?></td>
+    </tr>
+    <tr>
+        <td class="active"><strong>Otra referencia</strong></td>
+        <td><?= $home->OTHER_REFERENCE ?></td>
+        <td class="active"><strong>Municipio</strong></td>
+        <td><?= $home->mun->MUNICIPALITY_NAME ?></td>
+    </tr>
+    <tr>
+
+        <td class="active"><strong>Localida o colonia</strong></td>
+        <td><?= $home->LOCALITY ?></td>
+        <td class="active"><strong>Clave de Estado</strong></td>
+        <td><?= $home->KEY_STATE?></td>
+    </tr>
+    <tr>
+        <td class="active"><strong>Clave de Municipio</strong></td>
+        <td><?= $home->KEY_MUN ?></td>
+        <td class="active"><strong>Seccion</strong></td>
+        <td><?= $home->sec->ID ?></td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="alert alert-danger">
+    <p style="text-align: center">OPERACION</p>
+</div>

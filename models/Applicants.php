@@ -90,10 +90,7 @@ class Applicants extends \yii\db\ActiveRecord
         return $this->hasOne(Nationalities::className(), ['id' => 'nationality_id']);
     }
 
-    public function getHome()
-    {
-        return $this->hasOne(HOMEDATA::className(), ['HOME_ID' => 'id']);
-    }
+
 
     public function beforeSave($insert)
     {
@@ -107,7 +104,6 @@ class Applicants extends \yii\db\ActiveRecord
                 
                 $this->id = $result["NEXTVAL"];
             }
-
             $this->STATUS = 1;
 
             return true;

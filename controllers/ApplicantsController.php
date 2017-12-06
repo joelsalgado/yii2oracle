@@ -40,12 +40,10 @@ class ApplicantsController extends Controller
         $searchModel = new ApplicantsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $code = MUNICIPALITY::findOne(1);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'code' => $code
+            'dataProvider' => $dataProvider
         ]);
     }
 
@@ -113,9 +111,19 @@ class ApplicantsController extends Controller
             $result = Yii::$app->db->createCommand($sql)->query();
         }
     }
+    protected function increment2(){
+        $count = "SELECT count(*) FROM USER_SEQUENCES WHERE SEQUENCE_NAME = '".Yii::$app->params['sequenceHome']."'";
+        $val = Yii::$app->db->createCommand($count)->queryOne();
+        $value = $val["COUNT(*)"];
+        if ($value <= 0) {
+            $sql = "CREATE sequence ".Yii::$app->params['sequenceHome'];
+            $result = Yii::$app->db->createCommand($sql)->query();
+        }
+    }
 
     public function actionReport($id) {
         $model = Applicants::findOne($id);
+        $home = HOMEDATA::find()->where(['APPLICANTS_ID' => $id])->one();
         $optionsArray = [
             'elementId'=> 'canvasTarget',
             'value'=> '12345678',
@@ -125,7 +133,8 @@ class ApplicantsController extends Controller
 
         $content = $this->renderPartial('_reportView', [
             'model'=> $model,
-            'code' => $code
+            'code' => $code,
+            'home' => $home
         ]);
         $pdf = new Pdf([
             'mode' => Pdf::MODE_UTF8, // leaner size using standard fonts
@@ -192,17 +201,37 @@ class ApplicantsController extends Controller
             ]);
     }
 
-    public function actionCreateData()
+    public function actionCreateData($id)
     {
         $model = new HOMEDATA();
+        $this->increment2();
+        if ($model->load(Yii::$app->request->post())) {
+            $model->APPLICANTS_ID = $id;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID]);
+             if($model->save()) {
+                 return $this->redirect(['menu', 'id' => $id]);
+             }
+             echo "bien"; die;
         } else {
             return $this->render('create-data', [
                 'model' => $model,
             ]);
         }
     }
+
+    public function actionUpdateData($id)
+    {
+        $model = HOMEDATA::find()->where(['APPLICANTS_ID' => $id])->one();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['menu', 'id' => $id]);
+        } else {
+            return $this->render('update-data', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+
 
 }
