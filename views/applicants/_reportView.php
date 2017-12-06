@@ -59,13 +59,20 @@
     <p style="text-align: center">DOCUMENTOS CONFORME A LAS REGLAS DE OPERACION</p>
 </div>
 
-<div id="showBarcode"></div>
-<?php
-use barcode\barcode\BarcodeGenerator;
-$optionsArray = array(
-    'elementId'=> 'showBarcode',
-    'value'=> '12345678',
-    'type'=>'code128',
-);
-echo BarcodeGenerator::widget($optionsArray);
-?>
+
+
+<table class="table">
+    <tbody>
+        <tr>
+            <td class="active"><strong>Identificación oficial vigente (INE)</strong></td>
+            <td><?= $model->VIGENCY_IDENTIFY ?></td>
+            <td class="active"><strong>Clave de elector</strong></td>
+            <td><?= $model->KEY_ELECTOR ?></td>
+        </tr>
+        <tr>
+            <td class="active"><strong>Otro comprobante de identificacion</strong></td>
+            <td><?= $model->OTHER_DOCUMENT ?></td>
+        </tr>
+    </tbody>
+</table>
+

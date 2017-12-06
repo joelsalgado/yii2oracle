@@ -7,6 +7,8 @@ use app\models\SECTION;
 use Yii;
 use app\models\Applicants;
 use app\models\ApplicantsSearch;
+use app\models\HOMEDATA;
+use app\models\Folio;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,9 +16,7 @@ use kartik\mpdf\Pdf;
 use barcode\barcode\BarcodeGenerator as BarcodeGenerator;
 use yii\helpers\Json;
 
-/**
- * ApplicantsController implements the CRUD actions for Applicants model.
- */
+
 class ApplicantsController extends Controller
 {
 
@@ -57,7 +57,7 @@ class ApplicantsController extends Controller
         ]);
     }
 
-    public function actionCreate()
+    public function actionCreate($id)
     {
         $model = new Applicants();
         $this->increment();
@@ -67,6 +67,7 @@ class ApplicantsController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'id' => $id
             ]);
         }
     }
@@ -161,6 +162,47 @@ class ApplicantsController extends Controller
             }
         }
         echo Json::encode(  ['output'=>'', 'selected'=>'']);
+    }
+
+
+    public function actionMenu($id)
+    {
+        $model = Applicants::findOne($id);
+        $status = 0;
+        if ($model){
+            $status = 1;
+            return $this->render('menu', [
+                'model' => $model,
+                'status' => $status,
+                'id' => $id
+            ]);
+        }
+        else{
+            return $this->render('menu', [
+                'status' => $status,
+                'id' => $id
+            ]);
+        }
+    }
+
+    public function actionFolio()
+    {   $model = new Folio();
+        return $this->render('folio',[
+            'model' => $model
+            ]);
+    }
+
+    public function actionCreateData()
+    {
+        $model = new HOMEDATA();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->ID]);
+        } else {
+            return $this->render('create-data', [
+                'model' => $model,
+            ]);
+        }
     }
 
 }

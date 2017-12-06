@@ -13,7 +13,7 @@ use yii\widgets\MaskedInput;
     <div class="row">
         <?php $form = ActiveForm::begin(); ?>
         <div class="col-lg-6">
-            <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'style'=>'text-transform:uppercase;']) ?>
         </div>
         <div class="col-lg-6">
             <?= $form->field($model, 'last_name')->textInput(['maxlength' => true]) ?>
@@ -60,6 +60,20 @@ use yii\widgets\MaskedInput;
         <div class="col-lg-6">
             <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
         </div>
+
+        <div class="col-lg-6">
+            <?= $form->field($model, 'VIGENCY_IDENTIFY')->radioList(['SI' => 'SI', 'NO' => 'NO']); ?>
+        </div>
+
+        <div class="col-lg-6">
+            <?= $form->field($model, 'KEY_ELECTOR')->textInput(['maxlength' => true]) ?>
+        </div>
+
+        <div class="col-lg-6">
+            <?= $form->field($model, 'OTHER_DOCUMENT')->textInput(['maxlength' => true]) ?>
+        </div>
+
+
     </div>
 
     <div class="form-group">

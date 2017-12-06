@@ -2,13 +2,12 @@
 
 use yii\helpers\Html;
 
-
-/* @var $this yii\web\View */
-/* @var $model app\models\Applicants */
-
 $this->title = 'Crear Solicitante';
 $this->params['breadcrumbs'][] = ['label' => 'Solicitante', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Folio', 'url' => ['folio']];
+$this->params['breadcrumbs'][] = ['label' => 'Menu', 'url' => ['menu', 'id' => $id]];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="applicants-create">
 
