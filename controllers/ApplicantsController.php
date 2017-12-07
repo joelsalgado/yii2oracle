@@ -166,7 +166,7 @@ class ApplicantsController extends Controller
                 //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
                 //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
                 // ]
-                echo Json::encode(['output'=>$out, 'selected'=>'']);
+                echo Json::encode(['output'=>$out, 'selected'=>$out]);
                 return;
             }
         }

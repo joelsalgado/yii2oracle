@@ -22,7 +22,9 @@
         "kartik-v/yii2-krajee-base": "dev-master",
         "kartik-v/yii2-mpdf": "*",
         "vilochane/yii2-barcode-generator": "dev-master",
-        "kartik-v/yii2-widget-depdrop": "@dev"
+        "kartik-v/yii2-widget-depdrop": "@dev",
+        "dmstr/yii2-adminlte-asset": "^2.1",
+        "kartik-v/yii2-widget-select2": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
